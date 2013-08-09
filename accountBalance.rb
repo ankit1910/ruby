@@ -1,4 +1,5 @@
 class Customer
+@@acc = 0
   attr_reader   :name, :accountNum
   attr_accessor :balance
   def initialize (name,balance)
@@ -15,4 +16,12 @@ class Customer
     @balance -= amount
   end
 end
-@@acc = 0
+var = Customer.new("ankit",1000)
+puts var.accountNum
+var1 = Customer.new("rahul",1000)
+puts var.accountNum
+var2 = Customer.new("jaitn",1000)
+puts var.accountNum
+var3 = Customer.new("sahil",1000)
+puts var.accountNum
+
