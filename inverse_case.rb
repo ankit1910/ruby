@@ -1,6 +1,6 @@
 class String
   def to_s
-  	swapcase
+    swapcase
   end
 end
 puts gets.to_s
