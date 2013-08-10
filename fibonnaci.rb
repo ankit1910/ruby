@@ -1,9 +1,8 @@
-def fibonaci()
-  first, second, max = 0,1,1000
-  while first < 1000
-    yield(first)
-    temp, first = first, second
-	  second += temp
+def fibonaci(max)
+  first, second = 0, 1
+  while first < max
+    yield first
+    first, second = second, first + second
   end
 end
-fibonaci() {|num| puts num}
+fibonaci(1000) {|num| puts num }
