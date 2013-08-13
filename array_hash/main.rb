@@ -2,8 +2,8 @@ class Array
   def to_hash
     ret_hash = Hash.new
     for item in self
-      len = x.to_s.size
-      ret_hash[] ||= []
+      len = item.to_s.size
+      ret_hash[len] ||= []
       ret_hash[len] << item
     end
     p ret_hash
