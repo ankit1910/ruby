@@ -1,7 +1,8 @@
 class Time
   def add_time(time_array)
     result_time = self
-    for i in 0.upto(time_array.size-1)
+    size = time_array.size
+    size.times do |i|
       add_factor = (time_array[i].hour * 3600) + (time_array[i].min * 60) + time_array[i].sec
       result_time = result_time + add_factor
     end
