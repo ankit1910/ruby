@@ -1,15 +1,10 @@
 class Array
   def to_hash
-     hash = self.group_by{|ele| ele.to_s.length}
-     hash.inject({}) do |hash, item|
+    output_hash = self.group_by{|ele| (ele.is_a? Enumerable) ? ele.size : ele.to_s.length}
+    new_hash = {"odd" => [], "even" => []}
+    output_hash.inject(new_hash) do |hash, item|
       len = item[0]
-      if len.even?
-        hash["even"] ||= []
-        hash["even"] << item[1]
-      else
-        hash["odd"] ||= []
-        hash["odd"] << item[1]
-      end
+      len.even? ? hash["even"] << item[1] : hash["odd"] << item[1]
       hash
     end
   end
