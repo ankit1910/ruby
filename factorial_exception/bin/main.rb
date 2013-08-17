@@ -2,8 +2,8 @@ require_relative '../lib/integer.rb'
 puts "enter number"
 begin
   number = Integer(gets)
-  raise "cant not take negative value to for finding factorial" if number < 0
+  raise Exception if number < 0
   p number.factorial
-  rescue Exception => e
-  p e.message
+rescue Exception => e
+  p "wrong value for input for finding the factorial"
 end
