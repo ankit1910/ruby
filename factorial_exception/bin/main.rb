@@ -1,9 +1,9 @@
-require_relative '../lib/range.rb'
+require_relative '../lib/integer.rb'
 puts "enter number"
 begin
-  number = gets.to_i
-  raise RuntimeError if number < 1
-  p (1..number).factorial
-  rescue RuntimeError
-    p "number if either 0 or negative"
+  number = Integer(gets)
+  raise "cant not take negative value to for finding factorial" if number < 0
+  p number.factorial
+  rescue Exception => e
+  p e.message
 end
