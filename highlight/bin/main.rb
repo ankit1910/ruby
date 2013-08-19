@@ -1,8 +1,7 @@
-require_relative '../lib/count_no_occur.rb'
-puts "enter string"
+require_relative '../lib/string.rb'
+print "enter string : "
 input_string = gets.chomp
-print "word to be matched"
+print "word that to be highlighted : "
 search_word = gets.chomp
-
-obj = CountNoOccur.new
-obj.count_no_of_occurence(input_string,search_word)
+output = input_string.count_no_of_occurence(search_word)
+puts "#{output[0]} \nTotal Occurences found: #{output[1]}"
