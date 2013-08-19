@@ -6,6 +6,6 @@ class Bike < Vehicle
     @dealer = dealer
   end
   def to_s
-    super + "\ndealer = #{@dealer}"
+    super + "\ndealer = #{ @dealer }"
   end
 end
