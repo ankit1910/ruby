@@ -1,5 +1,5 @@
-require_relative '../lib/intrest.rb'
-obj = Intrest.new {[10000.0, 4.0]}
-p "simple intrest is : #{obj.simple_intrest}"
-p "compound intrest is : #{obj.compound_intrest}"
-p "diffrence in intrest is : #{obj.diffrence_intrest}"
+require_relative '../lib/interest.rb'
+obj = Interest.new {[10000.0, 4.0]}
+p "simple interest is : #{obj.simple_interest}"
+p "compound interest is : #{obj.compound_interest}"
+p "diffrence in interest is : #{obj.diffrence_interest}"
