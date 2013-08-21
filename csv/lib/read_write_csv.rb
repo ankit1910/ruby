@@ -3,17 +3,16 @@ class ReadWriteCsv
     @file_data_hash = Hash.new {|hash, key| hash[key] = []}
   end
   def read_csv(file)   
-    arr_of_arrs = CSV.read(file)
-    arr_of_arrs.each do |element|
-      @file_data_hash[element[2]] << [element[0], element[1]]
+    CSV.foreach(file) do |row|
+    @file_data_hash[row[2]] << [row[0], row[1]]
     end
   end
-  def write_csv(file)
-    CSV.open(file, "wb") do |csv|
-      @file_data_hash.each do |key, value|
-        csv << [key]
-        @file_data_hash[key].each do |element|
-          csv << ["#{element[0]}(EmpId: #{element[1]})"]
+  def write_file(file)
+    File.open(file, "w") do |file|
+      @file_data_hash.each_key do |key|
+        file.puts "#{ key } :"
+        @file_data_hash[key].each do |value|
+          file.puts "#{value[0]}(EmpId: #{value[1]})"
         end
       end
     end
