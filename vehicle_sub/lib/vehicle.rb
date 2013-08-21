@@ -1,6 +1,6 @@
 class Vehicle
-  attr_accessor :price
-  def  initialize(name, price)
+  attr_writer :price
+  def initialize(name, price)
     @name = name
     @price = price
   end
