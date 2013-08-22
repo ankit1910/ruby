@@ -1,7 +1,7 @@
 class String
   def highlight_and_count_word(word)
     count = 0
-    k = self.gsub!(/#{word}/i){ |match| count += 1 ;"(#{match})" }
-    return self, count 
+    output = self.gsub(/#{ word }/i){ |match| count += 1 ;"(#{match})" }
+    return output, count 
   end
 end
