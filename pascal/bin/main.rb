@@ -1,2 +1,2 @@
 require_relative '../lib/pascal.rb'
-Pascal.pascal(6) { |x| print x, " "}
+Pascal.pascal(6) { |x| print x, " " }
