@@ -1,0 +1,2 @@
+class NameErrors < StandardError
+end
