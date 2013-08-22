@@ -1,15 +1,11 @@
 require_relative '../lib/integer.rb'
-class NegativeNumber < StandardError
-end
-class StringInput < StandardError
-end
+require_relative '../lib/negative_number.rb'
+require_relative '../lib/string_input.rb'
 puts "enter number"
 begin
-  number = gets.chomp
-  raise NegativeNumber if number.to_i < 0
-  raise StringInput if number =~ /[a-z]/i
-  raise if number !~ /[0-9]+/
-  p number.to_i.factorial
+  input = gets.chomp
+  number = (input =~ /^0+$/) ? 1 : input.to_i
+  p number.factorial
 rescue NegativeNumber
   p "Negative value for finding the factorial"
 rescue StringInput
