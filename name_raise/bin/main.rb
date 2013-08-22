@@ -4,7 +4,7 @@ begin
   puts "enter first name"
   first_name = gets.chomp
   raise NameErrors, "First name can not be empty" if first_name.empty?
-  raise NameErrors,"First letter of first name is not capital" if (first_name.capitalize!) != nil
+  raise NameErrors,"First letter of first name is not capital" if (first_name != first_name.capitalize)
   puts "enter last name"
   last_name = gets.chomp
   raise NameErrors, "Last name can not be empty" if last_name.empty?
