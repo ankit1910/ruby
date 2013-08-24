@@ -1,21 +1,17 @@
-require_relative "../lib/taxes.rb"
-require_relative "../lib/add_taxes.rb"
-require_relative "../lib/display_invoice.rb"
-product_list = Hash.new { |hash, key| hash[key] = [] }
+require_relative "../lib/product.rb"
+require_relative "../lib/invoice.rb"
+invoice = Invoice.new
 while true
   puts "Name of the product: "
   name = gets.chomp
-  puts "Imported?: "
-  product_list[name] << gets.chomp
-  puts "Exempted from sales tax?: "
-  product_list[name] << gets.chomp
+  puts "Imported? (y/n): "
+  is_imported = gets.chomp
+  puts "Exempted from sales tax? (y/n): "
+  is_sales_tax_exempted = gets.chomp
   puts "Price: "
-  product_list[name] << gets.chomp.to_i
+  price = gets.chomp.to_i
+  invoice.products << Product.new(name, price, is_imported, is_sales_tax_exempted)
   puts "Do you want to add more items to your list(y/n): "
   break if gets !~ /[y]/i
 end
-taxes = Taxes.new
-taxes.calculate_sales_tax(product_list)
-taxes.calculate_import_duty(product_list)
-updated_product_list = AddTaxes.tax_addition(product_list)
-DisplayInvoice.display_invoice(updated_product_list)
+invoice.generate_invoice
