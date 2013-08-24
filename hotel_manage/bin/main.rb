@@ -1,23 +1,27 @@
 require 'date'
 require_relative '../lib/get_json_data.rb'
+require_relative '../lib/hotel.rb'
 require_relative '../lib/invoice.rb'
-require_relative '../lib/show_hotel_details.rb'
+hotel_list = []
+hotels_detail = GetJsonData.read_json_file('data.json')
+hotels_detail.each do |hotel|
+  name = hotel["Hotel_name"]
+  tax = hotel["tax"].to_i
+  rate = hotel["rate"].to_i
+  seasonal_rates = hotel["seasonal_rates"]
+  hotel_list << Hotel.new(name, tax, rate, seasonal_rates)
+end
+hotel_list.each do |hotel|
+  hotel.show_details
+end
 
-hotels_detail = GetJsonData.get_json_data('data.json')
-ShowHotelDetails.show_details(hotels_detail)
-begin
-  puts "Insert check In Date"
-  check_in = Date.parse(gets.chomp)
-  puts "Insert check Out Date"
-  check_out = Date.parse(gets.chomp)
-  hotels_detail.each do |hotel|
-    name = hotel["Hotel_name"]
-    rate = hotel["rate"]
-    tax = hotel["tax"] ? hotel["tax"] : nil
-    seasonal_rates = hotel["seasonal_rates"] ? hotel["seasonal_rates"] : nil
-    bill = Invoice.new(name, rate, seasonal_rates, tax)
-    bill.calculate_rent(check_in, check_out, name) if check_out > check_in
-  end
-rescue ArgumentError
-  puts "wrong date format"
+puts "Insert check In Date"
+check_in = Date.parse(gets.chomp)
+puts "Insert check Out Date"
+check_out = Date.parse(gets.chomp)
+
+hotel_list.each do |hotel|
+  invoice = Invoice.new(hotel, check_in, check_out)
+  invoice.calculate_rent
+  invoice.display_invoice
 end
