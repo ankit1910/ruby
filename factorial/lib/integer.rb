@@ -1,9 +1,6 @@
 class Integer
   def factorial
-    output = 1
-    for num in (1..self)
-      output *= num
-    end
-    output
+    raise RuntimeError if self < 0
+    self <= 0 ? 1 : self * (self - 1).factorial
   end
 end

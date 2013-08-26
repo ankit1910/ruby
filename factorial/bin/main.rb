@@ -1,5 +1,10 @@
 require_relative '../lib/integer.rb'
-puts "Enter number to find out its factorial"
-input = gets.chomp
-number = input == '0' ? 1 : input.to_i
-p (number > 0) ? number.factorial : "wrong input for factorial"
+begin
+  puts "Enter number to find out its factorial"
+  input = Integer(gets.chomp)
+  puts input.factorial
+rescue ArgumentError
+  puts "cant find factorial for string or special character"
+rescue RuntimeError
+  puts "cant find factorial for negative numbers"
+end
