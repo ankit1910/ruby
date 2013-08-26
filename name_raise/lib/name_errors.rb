@@ -1,2 +1,0 @@
-class NameErrors < StandardError
-end
