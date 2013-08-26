@@ -1,0 +1,2 @@
+class FirstNameNotCapitalizeError < StandardError
+end
