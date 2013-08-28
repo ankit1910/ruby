@@ -6,6 +6,7 @@ class Name
     @first_name = first_name
     @last_name = last_name
   end
+  
   def to_s
     "Name : #{ @first_name } #{ @last_name }"
   end
