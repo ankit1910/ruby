@@ -1,10 +1,12 @@
 require_relative '../lib/integer.rb'
+require_relative '../lib/negative_number.rb'
 begin
   puts "Enter number to find out its factorial"
   input = Integer(gets.chomp)
+  puts "FACTORIAL IS :"
   puts input.factorial
-rescue ArgumentError
-  puts "cant find factorial for string or special character"
-rescue RuntimeError
-  puts "cant find factorial for negative numbers"
+rescue ArgumentError => e 
+  puts e.message
+rescue NegativeNumber => e 
+  puts e.message
 end

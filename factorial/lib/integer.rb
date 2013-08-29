@@ -1,6 +1,6 @@
 class Integer
   def factorial
-    raise RuntimeError if self < 0
-    self <= 0 ? 1 : self * (self - 1).factorial
+    raise NegativeNumber if self < 0
+    num = self == 0 ? 1 : (1..self).reduce(:*)
   end
 end

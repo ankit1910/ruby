@@ -1,0 +1,2 @@
+class NegativeNumber < RuntimeError
+end
