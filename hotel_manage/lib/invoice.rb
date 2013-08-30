@@ -1,5 +1,5 @@
 class Invoice
-  attr_accessor : :hotel, :check_in, :check_out, :seasonal_rent, :total_rent 
+  attr_accessor :hotel, :check_in, :check_out, :seasonal_rent, :total_rent 
   def initialize (hotel, check_in, check_out)
     @hotel = hotel
     @check_in = check_in
