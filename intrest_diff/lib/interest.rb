@@ -2,9 +2,10 @@ class Interest
   attr_accessor :principal, :time
   def initialize
     @principal, @time  = yield
+    @rate = 10.0
   end
   def rate
-    10.0/100    
+    @rate/100    
   end
   def simple_interest
     principal * time * rate 
