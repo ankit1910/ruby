@@ -1,22 +1,34 @@
 class Product
   @@sales_tax_rate = 10.0
   @@import_duty = 5.0
-  attr_reader :name, :price, :is_imported, :is_sales_tax
+  attr_reader :name, :price, :imported, :sales_tax_exempted
   attr_accessor :after_tax_price, :sales_tax, :import_duty
-  def initialize(name, price, is_imported, is_sales_tax)
+  
+  def initialize(name, price, imported, sales_tax_exempted)
     @name = name
     @price = price
-    @is_imported = (is_imported =~ /y|yes/i) ? 1 : 0
-    @is_sales_tax = (is_sales_tax =~ /y|yes/i) ? 0 : 1
-    @after_tax_price = calculate_sales_tax + calcuate_import_duty + price
-    @sales_tax = calculate_sales_tax
-    @import_duty = calcuate_import_duty
+    @imported = !!(imported =~ /y|yes/i)
+    @sales_tax_exempted = !!(sales_tax_exempted =~ /y|yes/i)
+    @sales_tax = 0
+    @import_duty = 0
+    @after_tax_price = 0
   end
-  private
+  
   def calculate_sales_tax
-    (is_sales_tax * price * @@sales_tax_rate) / 100
+    if !sales_tax_exempted
+      self.sales_tax = (price * @@sales_tax_rate) / 100 
+    end
   end
+  
   def calcuate_import_duty
-    (is_imported * price * @@import_duty) / 100
+    if imported
+      self.import_duty = (price * @@import_duty) / 100
+    end
+  end
+  
+  def after_tax_price
+    calculate_sales_tax
+    calcuate_import_duty
+    self.after_tax_price = sales_tax + import_duty + price 
   end
 end
