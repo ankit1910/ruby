@@ -16,8 +16,9 @@ class Invoice
           for date in (check_in...check_out)
             start_date = Date.parse(season[key]["start"] + "-#{ date.year }")
             end_date = Date.parse(season[key]["end"] + "-#{ date.year }")
-            start_date <<= 12 if end_date < start_date 
-            if date >= start_date && date <= end_date
+            start_date <<= 12 if end_date < start_date
+            range = Range.new(start_date, end_date) 
+            if range.include?date 
               seasonal_rent[key][0] += 1
               seasonal_rent[key][1] += season[key]["rate"].to_i
               total_days -= 1

@@ -2,8 +2,10 @@ require 'date'
 require_relative '../lib/get_json_data.rb'
 require_relative '../lib/hotel.rb'
 require_relative '../lib/invoice.rb'
-hotel_list = []
+
 hotels_detail = GetJsonData.read_json_file('data.json')
+hotel_list = []
+
 hotels_detail.each do |hotel|
   name = hotel["Hotel_name"]
   tax = hotel["tax"].to_i
@@ -11,6 +13,7 @@ hotels_detail.each do |hotel|
   seasonal_rates = hotel["seasonal_rates"]
   hotel_list << Hotel.new(name, tax, rate, seasonal_rates)
 end
+
 hotel_list.each do |hotel|
   hotel.show_details
 end
@@ -20,8 +23,12 @@ check_in = Date.parse(gets.chomp)
 puts "Insert check Out Date"
 check_out = Date.parse(gets.chomp)
 
-hotel_list.each do |hotel|
-  invoice = Invoice.new(hotel, check_in, check_out)
-  invoice.calculate_rent
-  invoice.display_invoice
+if check_out > check_in
+  hotel_list.each do |hotel|
+    invoice = Invoice.new(hotel, check_in, check_out)
+    invoice.calculate_rent
+    invoice.display_invoice
+  end
+else
+  puts "checkout date must be after checkin date "
 end

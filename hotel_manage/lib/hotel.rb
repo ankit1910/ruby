@@ -9,13 +9,18 @@ class Hotel
 
   def show_details
     puts "*" * 60
-    puts "Hotel Name : #{ name }"
-    puts "Tax : #{ tax }%" if tax
-    puts "Rate : #{ rate }"
-    if seasonal_rates
-      puts "Seasonal Rates"
-      seasonal_rates.each do |season|
-        season.each_key {|key| puts "#{key} : #{season[key]["rate"]} (Start : #{season[key]["start"]} , End : #{season[key]["end"]})"}
+    instance_variables.each do |var|
+        title = var.to_s.gsub('@', '').capitalize
+        value = instance_variable_get(var)
+      if value != @seasonal_rates
+        puts " #{ title } : #{ value }"
+      elsif value
+        puts "#{ title } :"
+        value.each do |season|
+          season.each_key do |key|
+            puts "#{ key } : #{ season[key]["rate"] } (Start : #{ season[key]["start"] } , End : #{ season[key]["end"] })"
+          end
+        end
       end
     end
     puts "*" * 60
