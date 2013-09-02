@@ -1,41 +1,40 @@
 class Invoice
-  attr_accessor :products, :grand_total
-  
+
+  attr_accessor :products, :grand_total, :header
   def initialize
     @products = []
     @grand_total = 0
+    @header = []
   end
   
   def generate_invoice
-    header = generate_header
     calculate_after_tax_prices
-    rows = generate_rows
+    self.header = get_header_row
+    rows = get_produts_rowsit
     calculate_grand_total
     table = Tabular.new(header, rows, grand_total)
     table.display_table
   end
   
   private
-  def generate_header
-    header = []
-    products[0].instance_variables.each do |var|
-      header << var.to_s.gsub('@', '').capitalize
-    end
-    header
+  
+  def get_header_row
+    ["Name", "Price", "Import_duty", "Sales_tax", "After_tax_price"]
   end
   
   def calculate_after_tax_prices
     products.each do |product|
-      product.after_tax_price
+      product.calculate_after_tax_price
     end
   end
 
-  def generate_rows
+  def get_produts_rows
     rows = []
     products.each do |product|
       row = []
-      product.instance_variables.each do |var|
-        row << product.instance_variable_get(var)
+      header.each do |column|
+        inst_var = column.downcase.to_sym
+        row << product.send(inst_var)
       end
       rows << row
     end

@@ -1,7 +1,9 @@
 require_relative "../lib/product.rb"
 require_relative "../lib/invoice.rb"
 require_relative '../lib/tabular.rb'
+
 invoice = Invoice.new
+
 while true
   puts "Name of the product: "
   name = gets.chomp
@@ -15,4 +17,5 @@ while true
   puts "Do you want to add more items to your list(y/n): "
   break if gets !~ /[y]/i
 end
+
 invoice.generate_invoice

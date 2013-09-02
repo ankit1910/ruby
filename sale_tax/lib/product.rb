@@ -14,20 +14,21 @@ class Product
     @after_tax_price = 0
   end
   
-  def after_tax_price
+  def calculate_after_tax_price
     calculate_sales_tax
-    calcuate_import_duty
+    calculate_import_duty
     self.after_tax_price = sales_tax + import_duty + price 
   end
 
   private
+  
   def calculate_sales_tax
     if !sales_tax_exempted
       self.sales_tax = (price * @@sales_tax_rate) / 100 
     end
   end
   
-  def calcuate_import_duty
+  def calculate_import_duty
     if imported
       self.import_duty = (price * @@import_duty_rate) / 100
     end

@@ -1,5 +1,7 @@
 class Tabular
+
   attr_accessor :header, :rows, :footer
+  
   def initialize(header, rows = nil, footer)
     @header = header
     @rows = rows
@@ -14,6 +16,7 @@ class Tabular
   end
 
   private
+  
   def display_header(header, columns)
     make_line(columns)
     header.each do |column|
