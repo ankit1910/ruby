@@ -1,12 +1,20 @@
-module Tabular
-  def self.display_table(header, rows = nil, footer_value)
+class Tabular
+  attr_accessor :header, :rows, :footer
+  def initialize(header, rows = nil, footer)
+    @header = header
+    @rows = rows
+    @footer = footer
+  end
+
+  def display_table
     columns = header.count
     display_header(header, columns)
     display_content(rows, columns) if rows
-    display_footer(footer_value, columns)
+    display_footer(footer, columns)
   end
 
-  def self.display_header(header, columns)
+  private
+  def display_header(header, columns)
     make_line(columns)
     header.each do |column|
       make_column(column)
@@ -14,7 +22,7 @@ module Tabular
     make_line(columns)
   end
 
-  def self.display_content(rows, columns)
+  def display_content(rows, columns)
     rows.each do |row|
       row.each do |value|
         make_column(value)
@@ -24,16 +32,16 @@ module Tabular
     make_line(columns)      
   end
 
-  def self.display_footer(footer_value, columns)
-    puts "GRAND TOTAL = #{ footer_value }"
+  def display_footer(footer, columns)
+    puts "GRAND TOTAL = #{ footer }"
     make_line(columns)
   end
 
-  def self.make_column(value)
+  def make_column(value)
     printf("|%18s|", value)
   end
 
-  def self.make_line(columns)
+  def make_line(columns)
     puts ""
     puts '-' * (20 * columns)
   end

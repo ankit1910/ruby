@@ -11,14 +11,17 @@ class Invoice
     calculate_after_tax_prices
     rows = generate_rows
     calculate_grand_total
-    Tabular.display_table(header, rows, grand_total)
+    table = Tabular.new(header, rows, grand_total)
+    table.display_table
   end
+  
   private
   def generate_header
     header = []
     products[0].instance_variables.each do |var|
       header << var.to_s.gsub('@', '').capitalize
     end
+    header
   end
   
   def calculate_after_tax_prices
