@@ -10,7 +10,7 @@ class Invoice
   def generate_invoice
     calculate_after_tax_prices
     self.header = get_header_row
-    rows = get_produts_rowsit
+    rows = get_produts_rows
     calculate_grand_total
     table = Tabular.new(header, rows, grand_total)
     table.display_table
