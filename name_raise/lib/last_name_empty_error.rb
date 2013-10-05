@@ -1,2 +1,0 @@
-class LastNameEmptyError < StandardError
-end
