@@ -1,33 +1,26 @@
 require 'date'
 require_relative '../lib/get_json_data.rb'
 require_relative '../lib/hotel.rb'
+require_relative '../lib/enquiry.rb'
+require_relative '../lib/hotel_list.rb'
+require_relative '../lib/season.rb'
 require_relative '../lib/invoice.rb'
+require_relative '../lib/temp_reservation.rb'
+require_relative '../lib/billable_seasons.rb'
 
-hotels_detail = GetJsonData.read_json_file('data.json')
-hotel_list = []
+hotel_list = HotelList.new
+hotels = hotel_list.hotels
+hotel_list.show_price_catalogue
 
-hotels_detail.each do |hotel|
-  name = hotel["Hotel_name"]
-  tax = hotel["tax"].to_i
-  rate = hotel["rate"].to_i
-  seasonal_rates = hotel["seasonal_rates"]
-  hotel_list << Hotel.new(name, tax, rate, seasonal_rates)
-end
+puts "Insert check In Date(dd-mm-yyyy)"
+check_in = gets.chomp
+puts "Insert check Out Date(dd-mm-yyyy)"
+check_out = gets.chomp
+duration = Enquiry.new(check_in, check_out)
 
-hotel_list.each do |hotel|
-  hotel.show_details
-end
-
-puts "Insert check In Date"
-check_in = Date.parse(gets.chomp)
-puts "Insert check Out Date"
-check_out = Date.parse(gets.chomp)
-
-if check_out > check_in
-  hotel_list.each do |hotel|
-    invoice = Invoice.new(hotel, check_in, check_out)
-    invoice.calculate_rent
-    invoice.display_invoice
+if duration.valid?
+  hotels.each do |hotel|
+    Invoice.new(hotel).display(duration)
   end
 else
   puts "checkout date must be after checkin date "
