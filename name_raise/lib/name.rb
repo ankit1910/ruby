@@ -1,8 +1,8 @@
 class Name
   def initialize (first_name, last_name)
-    if !first_name || first_name.empty?
+    if valid?(first_name)
       raise FirstNameEmptyError, "first name can not be empty"
-    elsif !last_name || last_name.empty?
+    elsif valid?(last_name)
       raise LastNameEmptyError, "last name can not be empty"
     elsif first_name != first_name.capitalize
       raise FirstNameNotCapitalizeError, "first name should be capitalize"
@@ -10,8 +10,17 @@ class Name
       @first_name = first_name
       @last_name = last_name
     end
-  end  
+  end
+
   def to_s
     "Name : #{ @first_name } #{ @last_name }"
   end
+
+  private
+
+  def valid?(name)
+    name = name.strip
+    !name || name.empty?
+  end
+
 end
