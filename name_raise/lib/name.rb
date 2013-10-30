@@ -19,8 +19,11 @@ class Name
   private
 
   def valid?(name)
-    name = name.strip
-    !name || name.empty?
+    if !name.nil?
+      name.strip.empty?
+    else
+      false
+    end
   end
 
 end
