@@ -1,6 +1,6 @@
 class Name
   def initialize (first_name, last_name)
-    if valid?(first_name)
+    if nilO?(first_name)
       raise FirstNameEmptyError, "first name can not be empty"
     elsif valid?(last_name)
       raise LastNameEmptyError, "last name can not be empty"
