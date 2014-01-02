@@ -15,6 +15,7 @@ class String
       end
     end
     hash
+    
   end
 end
 
